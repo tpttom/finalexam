@@ -51,13 +51,13 @@ public class SimpleShippingApp extends JFrame {
 
 					// 1. Calculate Base Cost (The "Policy" logic)
 					if (policy.equals("Flat Rate")) {
-						cost = 20.0;
+						cost = new FlatRateStrategy().calculate(weight, distance);
 					} else if (policy.equals("Weight-Based")) {
-						cost = weight * 5.5;
+						cost =new WeightBasedStrategy().calculate(weight, distance);
 					} else if (policy.equals("Distance-Based")) {
-						cost = distance * 0.75;
+						cost = new DistanceBasedStrategy().calculate(weight, distance);
 					} else if (policy.equals("Carrier-Specific")) {
-						cost = (weight * 2) + (distance * 0.5) + 15;
+						cost = new CarrierSpecificBasedStrategy().calculate(weight, distance);
 					}
 
 					// 2. Add Handling Fee (The "Heavy Load" logic)
